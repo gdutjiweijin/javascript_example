@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>事件绑定</title>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oBtn = document.getElementById('btn1');
+			
+			
+			/*
+				oBtn.onclick=function(){
+					alert('a')
+				}
+				oBtn.onclick=function(){
+					alert('b')
+				}
+			*/
+			
+			
+			
+			/*
+			 * 	
+			 	//火狐
+				oBtn.addEventListener('click',function(){
+					alert('a')
+				},false)
+				oBtn.addEventListener('click',function(){
+					alert('b')
+				},false)
+				oBtn.addEventListener('click',function(){
+					alert('c')
+				},false)
+				
+			*/
+			
+			
+			/*
+			 * 
+			 	IE下的
+				oBtn.attachEvent('onclick',function(){
+					alert('c')
+				});
+				oBtn.attachEvent('onclick',function(){
+					alert('b')
+				});
+				oBtn.attachEvent('onclick',function(){
+					alert('a')
+				});
+			
+			*/
+				addEvent(oBtn,'click',function(){
+					alert('a')
+				})
+				addEvent(oBtn,'click',function(){
+					alert('b')
+				})
+				addEvent(oBtn,'click',function(){
+					alert('c')
+				})
+				
+				
+				
+				
+				
+				
+				
+				function addEvent(obj,sEv,fn){
+					if(obj.attachEvent){
+						obj.attachEvent('on'+sEv,fn);
+					}else{
+						obj.addEventListener(sEv,fn,false)
+					}
+				}
+			
+			}	
+		</script>
+	</head>
+	<body>
+		
+		
+		<input type="button" id="btn1"  value="事件绑定"/>
+		
+		
+	</body>
+</html>
+

@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>demo1</title>
+		<meta name="author" content="郑印" />
+		<style>
+			*{margin:0px;padding:0px;}
+			li{list-style:none;}
+			a{text-decoration:none;}
+			img{border:0;}
+			#tab{
+				width:360px;
+				height:241px;
+				overflow:hidden;
+				margin:20px auto;
+				padding:8px;
+				background:#FFF;
+				border:1px solid #e0e0e0;
+				box-shadow:0px 0px 5px #e0e0e0;
+			}
+			#tab .item{
+				width:100%;
+				height:27px;
+				overflow:hidden;
+				background:url(./images/ico.gif) no-repeat left -91px;
+			}
+			#tab .item li{
+				width:45px;
+				height:24px;
+				padding-bottom:3px;
+				line-height:24px;
+				background:url(./images/ico.gif) no-repeat right -47px;
+				float:left;
+				text-align:center;
+				font-size:12px;
+				display:block;
+				overflow:hidden;
+			}
+			#tab .item li.active{
+				background:url(./images/ico.gif) no-repeat -5px 0px;
+			}
+			#tab .item .active a{
+				color:#fff;
+			}
+			#tab .item li a{
+				color:#666666;
+				display:block;
+				float:left;
+				height:24px;
+				width:45px;
+			}
+			#tab .box{
+				margin-top:2px;
+				width:100%;
+				height:212px;
+				position:relative;
+			}
+			#tab .box .btnLeft{
+				position:absolute;
+				top:83px;
+				left:0px;
+				width:39px;
+				height:46px;
+				display:none;
+				z-index:10001;
+				background:url(./images/btnLeft.gif) no-repeat;
+			}
+			#tab .box .btnRight{
+				position:absolute;
+				top:83px;
+				right:0px;
+				width:39px;
+				height:46px;
+				display:none;
+				z-index:10001;
+				background:url(./images/btnRight.gif) no-repeat;
+			}
+			#tab .box ul{
+				width:100%;
+				height:212px;
+			}
+			#tab .box ul li{
+				width:100%;
+				height:212px;
+				position:relative;
+				display:none;
+			}
+			#tab .box ul li .keep{
+				width:100%;
+				height:26px;
+				position:absolute;
+				left:0px;
+				bottom:0px;
+				background:#000;
+				opacity:0.3;
+				filter:alpha(opacity=30);
+				z-index:1;
+			}
+			#tab .box ul li .text{
+				width:100%;
+				height:26px;
+				line-height:26px;
+				font-weight:bold;
+				text-indent:10px;
+				position:absolute;
+				left:0px;
+				bottom:0px;
+				font-size:12px;
+				z-index:2;
+			}
+			#tab .box ul li .text a{
+				color:#FFF;
+			}
+		</style>
+		<script type="text/javascript" src="move.js"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oTab = document.getElementById('tab');
+				var oItem = document.getElementById('item');
+				var aA = document.getElementsByTagName('a');
+				var aLi = oItem.getElementsByTagName('li');
+				var oPicTxtBox = document.getElementById('picTxtBox');
+				var aPicTxtLi = oPicTxtBox.getElementsByTagName('li');
+				var oBtnLeft = document.getElementById('btnLeft');
+				var oBtnRight = document.getElementById('btnRight');
+				var iNow = 0;				
+				var t = null;				
+				//鼠标移入导航切换对应图片
+				for(var i=0;i<aLi.length;i++){
+					aLi[i].index = i;
+					aLi[i].onmouseover=function(){
+						iNow  = this.index;
+						move(iNow)
+						
+					}
+				}
+				time()
+				function time(){
+					t=setInterval(function(){
+						//索引+1
+						iNow++;
+						if(iNow>aLi.length-1){
+							iNow=0;
+						}
+						move(iNow)
+					},2000)
+				}
+				//显示按钮
+				oTab.onmouseover=function(){
+					clearInterval(t);
+					oBtnLeft.style.display = 'block';
+					oBtnRight.style.display = 'block';
+				}
+				//隐藏按钮
+				oTab.onmouseout=function(){
+					time()
+					oBtnLeft.style.display = 'none';
+					oBtnRight.style.display = 'none';
+				}
+
+				oBtnRight.onclick=function(){
+
+					//索引+1
+					iNow++;
+					if(iNow>aLi.length-1){
+						iNow=0;
+					}
+
+					move(iNow)
+				}
+				oBtnLeft.onclick=function(){
+					//索引-1
+					iNow--;
+					if(iNow<0){
+						iNow = aLi.length-1;
+					}
+					
+					move(iNow)
+				}
+				//把所以的透明度，变成0 ，让当前变成100%
+				function move(index){
+					//隐藏所有的图片,清空所以的类名
+					for(var n=0;n<aLi.length;n++){
+						aPicTxtLi[n].style.display = 'none';
+						aPicTxtLi[n].style.opacity = 0;
+						aLi[n].className = '';
+					}
+					buffer(aPicTxtLi[index],{
+						opacity:100
+					},5)
+					document.title ='当前的索引是='+iNow
+					//显示图片显示，与类名
+					aPicTxtLi[index].style.display = 'block';
+					aLi[index].className = 'active';
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+	   <div id="tab">
+ 	 	  <ul class='item' id="item">
+	 	 	  <li  class='active'><a href="javascript:void(0);">资讯</a></li>		<!-- index = 0 -->
+			  <li><a href="javascript:void(0);">娱乐</a></li>
+			  <!-- index =1 -->
+			  <li><a href="javascript:void(0);">体育</a></li>
+			  <li><a href="javascript:void(0);">汽车</a></li>
+			  <li><a href="javascript:void(0);">时尚</a></li>
+			  <li><a href="javascript:void(0);">历史</a></li>
+			  <li><a href="javascript:void(0);">记实</a></li>
+			  <li><a href="javascript:void(0);">游戏</a></li>
+			  <!-- index = length-1 -->
+ 	 	 </ul>
+		 <div class='box'>
+		 	  <a class='btnLeft' id="btnLeft" href="javascript:void(0);"> </a>
+			  <a class='btnRight' id="btnRight" href="javascript:void(0);"> </a>
+			  <ul id="picTxtBox">
+			  	 <li style='display:block;'>
+			  	 	<a href="javascript:void(0);"><img src="./images/1.jpg"></a>
+			  	 	<p class='keep'> </p>
+					<p class='text'><a href="javascript:void(0);">
+					一周新闻图片5.3-5.9</a></p>
+				 </li>
+			  	 <li  >
+			  	 	<a href="jvascript:void(0);"><img src="./images/2.jpg"></a>
+				 	<p class='keep'> </p>
+					<p class='text'><a href="javascript:void(0);">赵本山16岁女儿近期生活照曝光</a></p>
+				 </li>
+				 <li>
+				 	<a href="jvascript:void(0);"><img src="./images/3.jpg"></a>
+				 	<p class='keep'> </p>
+					<p class='text'><a href="javascript:void(0);">马德里赛-李娜首轮爆冷</a></p>
+				 </li>
+				 <li>
+				 	<a href="jvascript:void(0);"><img src="./images/4.jpg"></a>
+				 	<p class='keep'> </p>
+					<p class='text'><a href="javascript:void(0);">车展记忆：8千万天价房车秒杀全场豪车 买车就有房</a></p>
+				 </li>
+				 <li>
+				 	<a href="jvascript:void(0);"><img src="./images/5.jpg"></a>
+				 	<p class='keep'> </p>
+					<p class='text'><a href="javascript:void(0);">【影像】中国百慕大：水深18米 吞没上千吨货轮</a></p>
+				 </li>
+				 <li>
+				 	<a href="jvascript:void(0);"><img src="./images/6.jpg"></a>
+				 	<p class='keep'> </p>
+					<p class='text'><a href="javascript:void(0);">
+					2012年清明节民众祭扫华国锋墓[高清组图] </a></p>
+				 </li>
+				 <li>
+				 	<a href="jvascript:void(0);"><img src="./images/7.jpg"></a>
+				 	<p class='keep'> </p>
+					<p class='text'><a href="javascript:void(0);">红旗SUV或年底发布</a></p>
+				 </li>
+				 <li>
+				 	<a href="jvascript:void(0);"><img src="./images/8.jpg"></a>
+				 	<p class='keep'> </p>
+					<p class='text'><a href="javascript:void(0);">
+					残忍的“富二代”胡亥：为权杀害12位公子10位公主</a></p>
+				 </li>
+			  </ul>
+		 </div>
+	 </div>
+  </body>
+</html>

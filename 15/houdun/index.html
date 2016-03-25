@@ -1,0 +1,663 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<link  type="text/css" rel="stylesheet"  href="./css/index.css" />
+		<style>
+			#loading{
+				width:300px;
+				height:50px;
+				border:1px solid #DDD;
+				box-shadow:0px 0px 5px #ddd;
+				position:relative;
+				margin:230px auto;
+				border-radius:5px;
+				overflow:hidden;
+				z-index:30001;
+			}
+			#loading .num{
+				position:absolute;
+				line-height:50px;
+				left:0px;
+				top:0px;
+				z-index:2;
+				width:100%;
+				height:100%;
+				font-family:Constantia;
+				font-size:30px;
+				text-align:center;
+				color:#000;
+			}
+			#loading .bar{
+				left:-300px;
+				top:0px;
+				z-index:1;
+				width:100%;
+				height:100%;
+				position:absolute;
+				background:#00A1F5;
+				border-radius:5px;
+			}
+			#bodyKeep{
+				width:100%;
+				height:1000px;
+				background:#FFF;
+				position:fixed;
+				_position:absolute;
+				z-index:30000;
+				display: block;
+				left:0px;
+				top:0px;
+			}
+		</style>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="./js/drag.js"></script>
+		<script type="text/javascript" src="./js/onWheel.js"></script>
+		<script type="text/javascript" src="./js/index.js"></script>
+		<script  type="text/javascript">
+			function load(){
+				var oParent = $(this).parents('.pin');
+				oParent.css('height',this.height);
+				oParent.find('.keep').css('height',this.height);
+			}
+		</script>
+	</head>
+	<body style="overflow-y:hidden; " scroll="no">
+		<div id="bodyKeep">
+			
+		</div>
+		<div id="loading">
+			<div id="num" class='num'>
+				0%
+			</div>
+			<div id="bar" class='bar'>
+				
+			</div>
+		</div>
+		<div id="main">
+			<div class="listBox">
+				<div class='item'>
+					<h3>
+						<span class='txt'>毕业学生</span>
+						<span class='ico'> </span>
+					</h3>
+				</div>
+				<div class='content'>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/student/14.jpg"/>
+						</div>
+						<a class='keep' href="http://bbs.houdunwang.com/thread-36374-1-1.html">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									后盾“给力哥”- 月薪过万！由普通职员升级为项目经理，只用半年时间!
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/student/6.jpg"/>
+						</div>
+						<a class='keep' href="http://bbs.houdunwang.com/thread-36377-1-1.html">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									职业美发师成功转型PHP程序员
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/student/13.jpg"/>
+						</div>
+						<a class='keep' href="http://bbs.houdunwang.com/thread-36378-1-1.html">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									借力后盾 应届毕业生月薪5000起
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/student/4.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									寻求自我突破的有志青年
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/student/11.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									对代码情有独钟的会计专业生
+								</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="listBox">
+				<div class='item'>
+					<h3>
+						<span class='txt'>学员作品截图</span>
+						<span class='ico'> </span>
+					</h3>
+				</div>
+				<div class='content'>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/project/6.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p><span>姓名:</span><span>张瑞峰</span></p>
+								<p><span>班级:</span><span>两周</span></p>
+								<p class='describe'>
+									张瑞峰同学在来后盾php培训前的职业是医生，php开发方面为零基础。通过在后盾实训班两个半月的理论课学习和努力，熟练掌握了相关知识，在后期的项目实训中，张瑞峰同学仅用了半个月便完成了自己的实训项目-“瑞峰商城”，并顺利得到了后盾网提供的项目奖学金3000元。该同学现已入职新浪网。
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/project/2.jpg"/>
+						</div>
+						<a class='keep' href="http://www.houdunwang.com/zuopinzhanshi.html">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p><span>姓名:</span><span>张明</span></p>
+								<p><span>开发周期:</span><span>两周</span></p>
+								<p class='describe'>
+									房屋租赁网
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/project/1.jpg"/>
+						</div>
+						<a class='keep' href="http://www.houdunwang.com/zuopinzhanshi.html">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p><span>姓名:</span><span>杨伟</span></p>
+								<p><span>开发周期:</span><span>一个月</span></p>
+								<p class='describe'>
+									该项目已正式商业化运营，月收入突破万元。
+								</p>
+							</div>
+						</a>
+					</div>
+					
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/project/4.jpg"/>
+						</div>
+						<a class='keep' href="http://www.houdunwang.com/zuopinzhanshi.html">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p><span>姓名:</span><span>李强</span></p>
+								<p><span>班级:</span><span>两周</span></p>
+								<p class='describe'>
+									李强同学在来后盾php培训前的职业是模具师，网站开发方面为零基础。通过在后盾实训班两个半月的理论课学习和努力，熟练掌握了相关知识，在后期的项目实训中，李强同学仅用了半个月便完成了自己的实训项目 - “浪潮商城”。
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/project/5.jpg"/>
+						</div>
+						<a class='keep' href="http://www.houdunwang.com/zuopinzhanshi.html">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p><span>姓名:</span><span>白彦培</span></p>
+								<p><span>班级:</span><span>三周</span></p>
+								<p class='describe'>
+									白彦培同学在来后盾php培训前是即将毕业的大学生。通过两个半月在后盾实训班的学习和努力，在兼顾处理大学毕业事宜的同时，出色的完成了自己的实训项目-“精品团购网”。
+								</p>
+							</div>
+						</a>
+					</div>
+					
+					
+				</div>
+			</div>
+			<div class="listBox">
+				<div class='item'>
+					<h3>
+						<span class='txt'>课堂相关照片</span>
+						<span class='ico'> </span>
+					</h3>
+				</div>
+				<div class='content'>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/classroom/1.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/classroom/2.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/classroom/3.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/classroom/4.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									
+								</p>
+							</div>
+						</a>
+					</div>
+					
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/classroom/6.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+							
+								<p class='describe'>
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/classroom/7.jpg"/>
+						</div>
+						<a class='keep' href="javascript:void(0);">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								
+								<p class='describe'>
+								</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="listBox">
+				<div class='item'>
+					<h3>
+						<span class='txt'>旗下产品</span>
+						<span class='ico'> </span>
+					</h3>
+				</div>
+				<div class='content'>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/product/hdphp.png"/>
+						</div>
+						<a class='keep' href="http://hdphp.com/">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									HDPHP框架，是后盾网自主开发的一个开源的PHP框架，集URL路由处理/伪静态+html全静态/关联模型/连贯操作/缓存控制/RBAC/自动验证等强大功能为一体。
+								</p>
+							</div>
+						</a>
+					</div>
+					
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/product/2.jpg"/>
+						</div>
+						<a class='keep' href="http://study.houdunwang.com/">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									后盾网学习社区,是后盾网推出的一个在线学习系统,我们的课程包含了整个web开发体系,在这里您能时刻的掌握自己的学习进度,并对每课学习到的知识进行在线的测试,实实在在的学习到新的知识.
+								</p>
+							</div>
+						</a>
+					</div>
+					
+					
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/product/3.jpg"/>
+						</div>
+						<a class='keep' href="http://bbs.houdunwang.com">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									后盾网论坛（bbs.houdunwang.com）是后盾教育旗下的专业技术交流论坛，涵盖了以PHP培训技术为主的几乎所有的web技术交流，并会不定期更新发布我们的原创教学视频视频。
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/product/4.jpg"/>
+						</div>
+						<a class='keep' href="http://soft.houdunwang.com/hdjob/">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									后盾招聘系统是一个基于HDPHP框架开发的招聘CMS系统，多种缓存机制，文件缓存、模版缓存、静态缓存，加快响应.
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)" src="./images/product/5.jpg"/>
+						</div>
+						<a class='keep' href="http://soft.houdunwang.com/hdinfo/">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								<p class='describe'>
+									后盾HDinfo分类信息系统是一个基于HDPHP框架开发的分类信息CMS系统，简单的操作，齐全的功能，即便不懂PHP程序语言也能轻轻松松的打造出一个属于自己的全方位的分类信息网站
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class='pin'>
+						<div class='image'>
+							<img onload="load.call(this)"  src="./images/product/1.jpg"/>
+						</div>
+						<a class='keep' href="http://vip.houdunwang.com">
+							<div class='keepbj'> </div>
+							<div class='introduce'>
+								
+								<p class='describe'>
+									
+								</p>
+							</div>
+						</a>
+					</div>
+					
+				</div>
+			</div>
+			
+			
+		</div>
+		<div id="footerBox">
+			<div id="webLink">
+				<ul>
+					<li><a href="javascript:void(0);">类目展示</a></li>  
+					<li><a href="javascript:void(0);">我在后盾</a></li>	
+					<li><a href="javascript:void(0);">学习故事</a></li>
+					<li><a href="javascript:void(0);">我的薪资</a></li>
+					<li><a href="javascript:void(0);">开班信息</a></li>
+				</ul>
+			</div>
+			<div id="box">
+			<div id="woZaiHouDun" class='hide' >
+					<a  id="btnLeft" href='javascript:void(0);'> </a>
+					<a  id="btnRight" href='javascript:void(0);'> </a>
+					<ul>
+						<li><img width="400" height="260" src="./images/scholl/1.jpg"/></li>
+						<li><img width="400" height="260" src="./images/scholl/2.jpg"/></li>
+						<li><img width="400" height="260" src="./images/scholl/3.jpg"/></li>
+						<li><img width="400" height="260" src="./images/scholl/1.jpg"/></li>
+						<li><img width="400" height="260" src="./images/scholl/2.jpg"/></li>
+						<li><img width="400" height="260" src="./images/scholl/3.jpg"/></li>
+						<li><img width="400" height="260" src="./images/scholl/1.jpg"/></li>
+						<li><img width="400" height="260" src="./images/scholl/2.jpg"/></li>
+						<li><img width="400" height="260" src="./images/scholl/3.jpg"/></li>
+					</ul>
+				</div>
+				<div id="xueXiGuShi" class='hide'>
+					<p class='describe'>记录后盾实体班学员，培训生活的点滴，也是为更多想来后盾培训的同学提供一个了解后盾的一个真实的窗口。</p>
+					<div class='x_box'>
+						<ul>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">后盾PHP学习心得_韦冬</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">前端学完，又迎接新的开始</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">后盾学习路,筑建人生完美台阶</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">人生丶如花</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">感谢后盾</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">在后盾，实现人生的蜕变不是梦 </a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">改变从后盾开始</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">网页布局学习总结</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">美女也爱编程，期待成为大牛 </a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">后盾网出来了一个这样的小伙子 </a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">第二个学习心得~希望对后来人有帮助！！</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">3000元奖学金，哥拿到手了，你行吗</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">9 来后盾学习的朴实小伙</a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">新的人生是从后盾开始的 </a></li>
+							<li><a target="_blank" href="http://bbs.houdunwang.com/thread-41468-1-2.html">忘记过去，以空杯的心态，从头开始 </a></li>
+						</ul>
+						<p class='more'>
+							<a href="http://bbs.houdunwang.com/thread-21578-1-1.html">
+								<img src="./images/more1.gif"/><br/>
+								<span>查看更多</span>
+							</a>
+						</p>
+					</div>
+				</div>
+				<div id="jiuYeXinZi" class="hide" >
+					<div class='j_box'>
+						<div class='job'>
+							<div class='stuFace'>
+								<a href="http://bbs.houdunwang.com/thread-21578-1-1.html"><img  width="110" height="110" src="./images/1.jpg"/></a>
+							</div>
+							<div class="info">
+								<p><span>姓名：</span><span>李*</span></p>
+								<p><span>培训科目：</span><span>PHP高薪就业班</span></p>
+								<p><span>就职单位：</span><span>北京搜**网络科技有限公司</span></p>
+								<p><span>职位月薪：</span><span>10000元+五险</span></p>
+							</div>
+						</div>
+						<div class='job'>
+							<div class='stuFace'>
+								<a href="http://bbs.houdunwang.com/thread-21578-1-1.html"><img  width="110" height="110" src="./images/1.jpg"/></a>
+							</div>
+							<div class="info">
+								<p><span>姓名：</span><span>冯宏*</span></p>
+								<p><span>培训科目：</span><span>PHP高薪就业班</span></p>
+								<p><span>就职单位：</span><span>北京同济医院</span></p>
+								<p><span>职位月薪：</span><span>7000元+补助+五险一金</span></p>
+							</div>
+						</div>
+						<div class='job'>
+							<div class='stuFace'>
+								<a href="http://bbs.houdunwang.com/thread-21578-1-1.html"><img  width="110" height="110" src="./images/1.jpg"/></a>
+							</div>
+							<div class="info">
+								<p><span>姓名：</span><span>李朝*</span></p>
+								<p><span>培训科目：</span><span>PHP高薪就业班</span></p>
+								<p><span>就职单位：</span><span>北京美如林文化发展公司</span></p>
+								<p><span>职位月薪：</span><span>6000元+五险</span></p>
+							</div>
+						</div>
+						<div class='job'>
+							<div class='stuFace'>
+								<a href="http://bbs.houdunwang.com/thread-21578-1-1.html"><img  width="110" height="110" src="./images/1.jpg"/></a>
+							</div>
+							<div class="info">
+								<p><span>姓名：</span><span>李朝*</span></p>
+								<p><span>培训科目：</span><span>PHP高薪就业班</span></p>
+								<p><span>就职单位：</span><span>北京美如林文化发展公司</span></p>
+								<p><span>职位月薪：</span><span>6000元+五险</span></p>
+							</div>
+						</div>
+						<div class='job'>
+							<div class='stuFace'>
+								<a href="http://bbs.houdunwang.com/thread-21578-1-1.html"><img  width="110" height="110" src="./images/1.jpg"/></a>
+							</div>
+							<div class="info">
+								<p><span>姓名：</span><span>刘晓*</span></p>
+								<p><span>培训科目：</span><span>PHP高薪就业班</span></p>
+								<p><span>就职单位：</span><span>东莞市易进网络信息公司</span></p>
+								<p><span>职位月薪：</span><span>5500元+提成</span></p>
+							</div>
+						</div>
+						<div class='job'>
+							<div class='stuFace'>
+								<a href="http://bbs.houdunwang.com/thread-21578-1-1.html"><img  width="110" height="110" src="./images/1.jpg"/></a>
+							</div>
+							<div class="info">
+								<p><span>姓名：</span><span>马坤</span></p>
+								<p><span>培训科目：</span><span>PHP高薪就业班</span></p>
+								<p><span>就职单位：</span><span>上海一果网络科技有限公司</span></p>
+								<p><span>职位月薪：</span><span> 5000元</span></p>
+							</div>
+						</div>
+					</div>
+					<p class='more'>
+							<a href="http://bbs.houdunwang.com/thread-21578-1-1.html">
+								<img src="./images/more1.gif"/><br/>
+								<span>查看更多</span>
+							</a>
+					</p>
+				</div>
+				<div id="kaiBanXinXi" class='hide' >
+					<div class='k_box'>
+						<dl>
+							<dt>PHP高薪就业班</dt>
+							<dd class='red'><span>正在授课：</span></span>4月3日(爆满已开课)</span></dd>
+							<dd><span>座位预订：</span><span>5月13日</span></dd>
+							<dd><span>培训周期：</span><span>4个半月</span></dd>
+							<dd><span>教学内容：</span></dd>
+							<p>
+								从基础知识讲起，涵盖大型门户seo优化、web安全、mysql深度优化、索引优化、查询优化、php缓存优化、页面静态技术、memcache等后盾独家教学内容……
+							</p>
+						</dl>
+						<dl>
+							<dt>PHP高级工程师班</dt>
+							<dd class='red'><span>正在授课：</span></span>4月3日(座位已满)</span></dd>
+							<dd><span>座位预订：</span><span>5月13日</span></dd>
+							<dd><span>培训周期：</span><span>4个半月</span></dd>
+							<dd><span>教学内容：</span></dd>
+							<p>
+								针对有一定前端知识的学员，着重讲解PHP开发、MYSQL、LINUX操作系统等知识，并有独家精髓内容课程，使学员快速达到独立开发的水平……
+							</p>
+						</dl>
+						<dl>
+							<dt>PHP周末班</dt>
+							<dd class='red'><span>正在授课：</span></span>3月2日(座位已满)</span></dd>
+							<dd><span>座位预订：</span><span>5月13日</span></dd>
+							<dd><span>培训周期：</span><span>4个半月</span></dd>
+							<dd><span>教学内容：</span></dd>
+							<p>
+								有些同学还在工作，不能安排时间进行系统的脱产php培训。后盾特别开设周末班，方便大家在业余时间学习PHP开发，快速提高。周末班所有课程均为教学组老师精心编排，保证学员最佳的学习效果……
+							</p>
+						</dl>
+						<dl>
+							<dt>WEB前端开发班</dt>
+							<dd class='red'><span>正在授课：</span></span>4月3日（座位已满)</span></dd>
+							<dd><span>座位预订：</span><span>5月13日</span></dd>
+							<dd><span>培训周期：</span><span>4个半月</span></dd>
+							<dd><span>教学内容：</span></dd>
+							<p>
+								主要讲解web前端开发知识HTML、DivCss标准化页面布局以及前端脚本JAVASCRIPT的开发、jquery框架的使用……
+							</p>
+						</dl>
+						<dl>
+							<dt>PHP远程班</dt>
+							<dd class='red'><span>正在授课：</span></span>4月15日</span></dd>
+							<dd><span>座位预订：</span><span>5月13日</span></dd>
+							<dd><span>培训周期：</span><span>4个半月</span></dd>
+							<dd><span>教学内容：</span></dd>
+							<p>
+								PHP远程班专为不能来进行脱产学习的同学开设，提供最全面的远程授课系统，所讲知识与脱产培训班保持一致，并有后盾独家精髓内容课程……
+							</p>
+						</dl>
+					</div>
+				</div>	
+					
+				<div class='footer'>
+					
+					
+				</div>
+				
+			</div>
+		</div>
+		
+	</body>
+	<script>
+		var oNum = document.getElementById('num');
+		var aImg = document.getElementsByTagName('img');
+		var oBar = document.getElementById('bar');
+		var len = aImg.length;
+		var count = 0;
+		var iScale = 0;
+		for(var i=0;i<aImg.length;i++){
+			imgLoad(aImg[i].src)
+		}
+		
+		function imgLoad(src){
+			var oImg = new Image();
+			oImg.onload=function(){
+				count++;
+				move();
+			}
+			oImg.onerror=function(){
+				count++;
+				move();
+			}
+			oImg.src = src;
+		}
+		
+		function move(){
+			iScale = count/len;
+			oNum.innerHTML =parseInt(iScale*100)+'%';
+			var iLeft = iScale*300-300;
+			oBar.style.left = iLeft +'px';
+		}
+		
+		function show(){
+			document.getElementById('loading').style.display = 'none';
+			document.getElementById('bodyKeep').style.display = 'none';
+		}
+		setTimeout(function(){
+			show();
+		},10000)
+	</script>
+</html>
+

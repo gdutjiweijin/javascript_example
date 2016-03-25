@@ -1,0 +1,84 @@
+*{
+	padding:0px;
+	margin:0px;
+}
+img{
+	border: none;
+}
+.big_box{
+	width: 900px;
+	height: 310px;
+	margin: 50px auto;
+	position: relative;
+}
+.move_box{
+	width: 800px;
+	height: 310px;
+	border: 1px solid #ccc;
+	box-shadow: 0px 4px 4px #999;
+	margin: 0 auto;
+	position: relative;
+}
+.move_box a{
+	position: absolute;
+}
+.move_box b{
+	width: 100%;
+	height: 100%;
+	background: #000;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.move_box img{
+	width: 100%;
+	height: 100%;
+	box-shadow:0px 3px 5px #000;
+}
+.m0{
+	width: 160px;
+	height: 240px;
+	left: 0px;
+	top: 30px;
+	z-index: 10;
+}
+.m4{
+	width: 160px;
+	height: 240px;
+	right: 0px;
+	top: 30px;
+	z-index: 10;
+}
+.m0 b,.m4 b{
+	opacity: 0.4;
+	filter:alpha(opacity=40);
+}
+.m1{
+	width: 190px;
+	height: 280px;
+	left: 110px;
+	top: 10px;
+	z-index: 20;
+}
+.m3{
+	width: 190px;
+	height: 280px;
+	right: 110px;
+	top: 10px;
+	z-index: 20;
+}
+.m1 b,.m3 b{
+	opacity: 0.2;
+	filter:alpha(opacity=20);
+}
+.m2{
+	width: 220px;
+	height: 300px;
+	left: 300px;
+	top: 0px;
+	z-index: 30;
+}
+.m2 b{
+	opacity:0;
+	filter:alpha(opacity=0);
+}

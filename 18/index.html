@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		html{
+			background: url(about:blank) fixed;
+		}
+		.back{
+			width: 57px;
+			height: 57px;
+			background: url('./back.png') no-repeat;
+			position: fixed;
+			right: 50px;
+			bottom: 50px;
+			_position: absolute;
+			_right: 50px;
+			_top:expression(document.documentElement.clientHeight-this.offsetHeight-50+document.documentElement.scrollTop);
+			cursor: pointer;
+			display: none;
+		}
+		body{
+			height: 5000px;
+			font-size: 22px;
+			font-weight:700;
+		}
+	</style>
+	<script type="text/javascript" src="./jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var back = $('.back');
+			back.click(function() {
+				var timer = setInterval(function(){
+					$(window).scrollTop($(window).scrollTop()-50);
+					if($(window).scrollTop() == 0){
+						clearInterval(timer);
+					}
+				},2);
+			});
+
+			$(window).scroll(function() {
+				if($(window).scrollTop() < 100){
+					back.hide(500);
+				} else {
+					back.show(500);
+				}
+			});
+			
+		})
+	</script>
+</head>
+<body>
+	请往下拖动滚动条
+	<div class="back"></div>
+</body>
+</html>

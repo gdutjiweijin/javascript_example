@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		.box{
+			width: 405px;
+			height: 405px;
+			margin: 50px auto;
+			position: relative;
+			box-shadow: 4px 4px 4px #999;
+		}
+		.small{
+			float: left;
+			border: 1px solid #fff;
+		}
+		.big{
+			position: absolute;
+			width: 0px;
+			height: 0px;
+		}
+		.lt{
+			left: 0px;
+			top:0px;
+		}
+		.rt{
+			right: 0px;
+			top:0px;
+		}
+		.lb{
+			left: 0px;
+			bottom:0px;
+		}
+		.rb{
+			right: 0px;
+			bottom:0px;
+		}
+	</style>
+	<script type="text/javascript" src="./jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var i = 0;
+			var big = $('.big');
+			var timerVal = null;
+			var timerOut = null;
+
+			timerVal = setInterval(function(){
+				move();
+			},2000);
+
+			function move(){
+				if(i>3){
+					i = 0;
+				}
+				big.eq(i).css({width:0,height:0,display:'block'}).animate({width:405,height:405},400);
+				i++;
+				timerOut = setTimeout(function(){
+					big.fadeOut(500);
+				},1500);
+			}
+
+			big.hover(function() {
+				clearInterval(timerVal);
+				clearTimeout(timerOut);
+			}, function() {
+				big.fadeOut(500);
+				timerVal = setInterval(function(){
+					move();
+				},2000);
+			});
+			
+		})
+	</script>
+</head>
+<body>
+	<div class="box">
+		<img src="./img/small1.jpg" class="small" />
+		<img src="./img/small2.jpg" class="small" />
+		<img src="./img/small3.jpg" class="small" />
+		<img src="./img/small4.jpg" class="small" />
+		<img src="./img/big1.jpg" class="big lt" />
+		<img src="./img/big2.jpg" class="big rt" />
+		<img src="./img/big3.jpg" class="big lb" />
+		<img src="./img/big4.jpg" class="big rb" />
+	</div>
+</body>
+</html>

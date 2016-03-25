@@ -1,0 +1,352 @@
+*{margin:0px;padding:0px;}
+li{list-style:none;}
+img{border:0;}
+a{color:#333; text-decoration:none;}
+
+
+
+#main{
+	width:100%;
+	height:auto;
+}
+#main .listBox{
+	width:25%;
+	height:auto;
+	*width:24.99%;
+	_width:25%;
+	float:left;
+	position:relative;
+}
+#main .listBox .item{
+	width:100%;
+	height:54px;
+	background:url(../images/item_bj.jpg) repeat-x 0px 0px;
+	overflow:hidden;
+	cursor:pointer;
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:10001;
+}
+#main .listBox .item h3{
+	color:#fff;
+	font-size:16px;
+	height:24px;
+	line-height:24px;
+	width:80%;
+	margin:15px auto;
+}
+#main .listBox .item h3 .txt{
+	float:left;
+}
+#main .listBox .item h3 .ico{
+	float:right;
+	display:block;
+	width:19px;
+	height:13px;
+	margin-top:6px;
+	background:url(../images/item_icon.png) no-repeat 0px 0px;
+}
+#main .listBox  .content{
+	width:100%;
+	height:auto;
+	position:absolute;
+	left:0px;
+	top:54px;
+	z-index:10000;
+	overflow:hidden;
+	
+}
+#main .listBox  .content .pin{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	position:relative;
+}
+#main .listBox  .content .pin img{
+	width:100%;
+}
+
+#main .listBox  .content .pin  .keep{
+	width:100%;
+	position:absolute;
+	display:block;
+	overflow:hidden;
+	left:0px;
+	top:0px;
+	
+}
+
+
+#main .listBox  .content .pin  .keep .keepbj{
+	width:100%;
+	height:100%;
+	background:#000;
+	left:0px;
+	top:0px;
+	position:absolute;
+	opacity:0;
+	filter:alpha(opacity=0);
+	z-index:10002;
+}
+#main .listBox  .content .pin  .keep  .introduce{
+	padding:20px 0px 0px 20px;
+	font-size:12px;
+	position:relative;
+	z-index:10003;
+	color:#FFF;
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+#main .listBox  .content .pin  .keep  .introduce p{
+	line-height:20px;
+	width:100%;			
+}
+#main .listBox  .content .pin  .keep  .introduce p span{
+	padding-right:6px;
+}
+
+
+/***** 尾部开始  *****/
+#footerBox{
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	height:auto;
+	z-index:1000001;
+	background:#FFF;
+	width:100%;
+	overflow:hidden;
+}
+
+#webLink{
+	width:100%;
+	height:60px;
+	overflow:hidden;
+}
+#webLink ul{
+	width:500px;
+	height:30px;
+	margin:15px auto;
+}
+#webLink ul li{
+	float:left;
+	height:30px;
+	width:100px;
+	text-align:center;
+	font-size:14px;
+	font-family:'微软雅黑';
+	line-height: 30px;
+}
+#webLink ul li a{
+	color:#666;
+}
+#webLink ul li a:hover{
+	color:#3297D8;
+}
+
+
+
+#box{
+	width:100%;
+	height:0px;
+	overflow:hidden;
+}
+#box .hide{
+	display:none;
+}
+#box .footer{
+	width:100%;
+	height:43px;
+	background:url(../images/footerBg.gif) repeat-x 0px 0px;
+}
+#woZaiHouDun{
+	width:100%;
+	height:320px;
+	position:relative;
+	overflow:hidden;
+}
+#woZaiHouDun ul{
+	width:10000px;
+	height:260px;
+	overflow:hidden;
+	top:30px;
+	left:0px;
+	position:absolute;
+}
+#woZaiHouDun ul li{
+	float:left;
+	width:400px;
+	height:260px;
+}
+
+
+#btnLeft{
+	width:58px;
+	height:58px;
+	display:block;
+	position:absolute;
+	z-index:1000002;
+	background:url(../images/btn_l.png) no-repeat 0px 0px;
+	left:10px;
+	top:131px;
+}
+#btnLeft:hover{
+	background:url(../images/btn_l.png) no-repeat 0px -58px;
+}
+#btnRight{
+	width:58px;
+	height:58px;
+	display:block;
+	position:absolute;
+	z-index:1000002;
+	background:url(../images/btn_r.png) no-repeat 0px 0px;
+	right:10px;
+	top:131px;
+}
+
+#btnRight:hover{
+	background:url(../images/btn_r.png) no-repeat 0px -58px;
+}
+
+
+
+/***** 学习故事 *****/
+#xueXiGuShi{
+	width:100%;
+	height:260px;
+	overflow:hidden;
+}
+#xueXiGuShi .describe{
+	width:100%;
+	height:24px;
+	line-height:24px;
+	font-size:12px;
+	color:#333;
+	text-align:center;
+}
+#xueXiGuShi .x_box{
+	width:100%;
+	height:214px;
+	background:#333;
+	margin-top:23px;
+	overflow:hidden;
+}
+#xueXiGuShi .x_box ul{
+	width:960px;
+	height:130px;
+	margin:23px auto 21px auto;
+}
+#xueXiGuShi .x_box ul li{
+	width:320px;
+	height:26px;
+	line-height:26px;
+	float:left;
+	font-size:12px;
+}
+#xueXiGuShi .x_box ul a{
+	color:#FFF;
+	padding-left:20px;
+	background:url(../images/comments.png) no-repeat 0px 2px;
+}
+#xueXiGuShi .x_box ul a:hover{
+	color:#4397d8;
+}
+#box .more{
+	width:80px;
+	height:32px;
+	line-height:16px;
+	font-size:12px;
+	margin:0px auto;
+	text-align:center;
+}
+#box .more a{
+	color:#FFF;
+}
+
+/***** 就业薪资  *****/
+#jiuYeXinZi{
+	width:100%;
+	height:360px;
+	overflow:hidden;
+	background:#333;
+}
+#jiuYeXinZi .j_box{
+	width:960px;
+	height:260px;
+	margin:16px auto 21px auto;
+}
+#jiuYeXinZi .j_box .job{
+	width:320px;
+	height:120px;
+	margin-top:10px;
+	float:left;
+}
+#jiuYeXinZi .j_box .job .stuFace{
+	padding:5px;
+	background:#bbc1c6;
+	width:110px;
+	height:110px;
+	float:left;
+	border-radius:5px;
+}
+#jiuYeXinZi .j_box .job .info{
+	width:180px;
+	padding:0px 10px;
+	height:120px;
+	float:left;
+	font-size:12px;
+}
+#jiuYeXinZi .j_box .job .info p{
+	width:100%;
+	height:24px;
+	line-height:24px;
+	color:#FFF;
+}
+
+
+
+/****** 开班信息   ********/
+#kaiBanXinXi{
+	width:100%;
+	height:250px;
+	overflow:hidden;
+}
+#kaiBanXinXi .k_box{
+	width:960px;
+	height:250px;
+	overflow:hidden;
+	margin:0px auto;
+}
+#kaiBanXinXi .k_box dl{
+	width:180px;
+	height:250px;
+	overflow:hidden;
+	margin-right:12px;
+	float:left;
+}
+#kaiBanXinXi .k_box dl dt{
+	color:#000;
+	font-weight:bold;
+	font-size:16px;
+	width:100%;
+	height:28px;
+	line-height:28px;
+}
+	
+
+#kaiBanXinXi .k_box dl dd{
+	width:100%;
+	height:24px;
+	line-height:24px;
+	font-size:12px;
+}
+#kaiBanXinXi .k_box dl dd.red{
+	color:red;
+	font-weight:bold;	
+}
+#kaiBanXinXi .k_box dl p{
+	color:#333;
+	font-size:12px;
+	line-height:24px;
+}

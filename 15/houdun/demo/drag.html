@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>drap</title>
+		<style>
+			#div1{
+				width:100px;
+				height:100px;
+				background:#F00;
+				position:absolute;
+				cursor:pointer;
+				left:100px;
+				top:100px;
+			}
+			#parent{
+				width:500px;
+				height:300px;
+				border:1px solid green;
+				position:relative;
+				margin:20px auto;
+			}
+		</style>
+		<script src="../js/drag.js"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				
+				var oDiv  = document.getElementById('div1');
+			/*
+				var oParent = document.getElementById('parent');
+				var site = {
+					l:0,
+					r:oParent.offsetWidth-oDiv.offsetWidth,
+					t:0,
+					b:oParent.offsetHeight-oDiv.offsetHeight,
+					
+				}
+			*/	
+				drag(oDiv);
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			
+		</div>
+
+		
+	</body>
+</html>
+

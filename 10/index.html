@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<meta name="author" content="郑印" />
+		<!-- Date: 2013-05-31 -->
+		<style>
+			*{margin:0px;padding:0px;}
+			#photos{
+				width:880px;
+				height:374px;
+				overflow:hidden;
+				margin:0px auto;
+				padding-top:60px;
+			}
+			#photos .pt{
+				width:250px;
+				height:145px;
+				background:#ffffff;
+				border:6px solid #9cb5b1;
+				padding:5px;
+				float:left;
+				margin:20px 10px 0px 10px;
+				_margin:20px 10px 0px 5px;
+				cursor:pointer;
+				position:relative;
+			}
+			#photos .pt .keep{
+				width:250px;
+				height:145px;
+				background:url(./images/description-bg.png);
+				opacity:0.6;
+				filter:alpha(opacity=60);
+				position:absolute;
+				left:5px;
+				top:5px;
+				z-index:1;
+			}
+			#photos .pt .ico{
+				display:block;
+				width:36px;
+				height:36px;
+				background:url(./images/magnify.png);
+				position:absolute;
+				z-index:2;
+				left:112px;
+				top:57px;
+			}
+			#popup{
+				padding:10px;
+				background:#FFF;
+				position:absolute;
+				width:300px;
+				height:auto;
+				z-index:10002;
+				display:none;
+				filter:alpha(opacity=100);
+				opacity:1;
+			}
+			#popup .box{
+				position:relative;
+				width:100%;
+				height:100%;
+			}
+			#popup img{
+				width:100%;
+				height:100%;
+			}
+			#popup .colse{
+				width:30px;
+				height:30px;
+				background:url(./images/fancybox.png) no-repeat -40px 0px;
+				top:-25px;
+				right:-25px;
+				display:block;
+				position:absolute;
+			}
+			#popup .btnLeft{
+				width:30px;
+				height:30px;
+				background:url(./images/fancybox.png) no-repeat -40px -30px;
+				left:10px;
+				display:block;
+				position:absolute;
+				top:50%;
+				display:none;
+			}
+			#popup .btnRight{
+				width:30px;
+				height:30px;
+				background:url(./images/fancybox.png) no-repeat -40px -60px;
+				right:10px;
+				display:block;
+				position:absolute;
+				top:50%;
+				display:none;
+			}
+			#bodyKeep{
+				width:100%;
+				height:100%;
+				background:#000;
+				opacity:0.6;
+				filter:alpha(opacity=60);
+				position:fixed;
+				_position:absolute;
+				z-index:3000;
+				display: none;
+				left:0px;
+				top:0px;
+			}
+			#loading{
+				width:37px;
+				height:37px;
+				background:url(./images/ajax-loader.gif) no-repeat;
+				position:absolute;
+				z-index:10003;
+				display:none;
+			}		
+		</style>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="move.js"></script>
+		<script>
+			/*  <div class="keep"></div><div class="ico"></div>  */
+			$(function(){
+				$('#loading').css({
+					left:parseInt(($(window).width()-37)/2),
+					top:parseInt(($(window).height()-37)/2)
+				})
+				var aPt = $('#photos .pt');
+				var oPopup = $('#popup');
+				aPt.hover(function(){
+					//移入
+					$(this).append('<div class="keep"></div><div class="ico"></div>');
+				},function(){
+					//移出
+					$('#photos  .keep').remove();
+					$('#photos  .ico').remove();
+				})
+				var pos = [];		//位置相关的数组
+				var aSrc = [];		//图像路径相关的数组
+				var iNow = 0;		//记录正在操作的图像	
+				var iSize = aPt.size(); //图像长度
+				//压入位置信息
+				aPt.each(function(i){
+					pos[i] = {
+						left:$(this).offset().left,
+						top:$(this).offset().top,
+						width:$(this).width(),
+						height:$(this).height(),
+						opacity:0
+					}
+					aSrc[i] = $(this).find('img').attr('_bigsrc');
+				})
+				/**
+				 * 点击
+				 */
+				aPt.each(function(index){
+					$(this).click(function(){
+						var initSite = pos[index];
+						oPopup.css(initSite);
+						showPopup(index)
+					})
+				})
+				
+				/**
+				 * 关闭弹出层
+				 */
+				oPopup.find('.colse').click(function(){
+					var index = iNow;
+					var slef = $(this);
+					slef.hide();
+					$('#bodyKeep').hide();
+					oPopup.animate({
+						width:oPopup.innerWidth()+30,
+						height:oPopup.innerHeight()+30,
+						top:oPopup.offset().top-30,
+						left:oPopup.offset().left-30
+					},100,'',function(){
+						oPopup.animate(pos[index],300,'',function(){
+							oPopup.hide();
+							slef.show();
+						});
+					})
+				})
+				/**
+				 * 显示弹出层
+				 */
+				function showPopup(index){
+					$('#loading').show();
+					var sBigSrc = aSrc[index];
+					var oImg = new Image();
+					//图像加载
+					oImg.onload=function(){
+						$('#loading').hide();
+						var iLeft = parseInt(($(window).width()-oImg.width-20)/2);
+						var iTop = parseInt(($(window).height()-oImg.height-20)/2);
+						var iTarget = {
+							width:oImg.width,
+							height:oImg.height,
+							left:iLeft,
+							top:iTop,
+							opacity:100
+						}
+						showBodyKeep();
+						oPopup.find('img').animate({opacity:1})
+						oPopup.show().fiexible(iTarget,3,true,function(){
+							oPopup.find('.changeBtn').show();
+						});
+					}
+					oImg.src = sBigSrc;
+					oPopup.find('img').attr('src',sBigSrc);
+					iNow = index;
+				}
+				/**
+				 * 移入移出显示左右切换按钮
+				 */
+				oPopup.hover(function(){
+					oPopup.find('.changeBtn').show();
+				},function(){
+					oPopup.find('.changeBtn').hide();
+				})
+				/**
+				 * 左边按钮点击切换
+				 */
+				oPopup.find('.btnLeft').click(function(){
+					iNow--;
+					if(iNow<0){
+						iNow = iSize-1;
+					}
+					change()
+				})
+				/**
+				 * 右边按钮点击切换
+				 */
+				oPopup.find('.btnRight').click(function(){
+					iNow++;
+					if(iNow>iSize-1){
+						iNow = 0;
+					}
+					change();
+				})
+				
+				function change(){
+					oPopup.find('.changeBtn').hide();
+					oPopup.find('img').animate({
+						opacity:0
+					},300,'',function(){
+						showPopup(iNow);
+					})
+				}
+				
+			})
+			
+			/**
+			 * 显示页面主体遮罩
+			 */
+			function showBodyKeep(){
+				$('#bodyKeep').css({
+					width:$(window).width(),
+					height:$(document).height()
+				}).show();
+			}
+		</script>
+	</head>
+	<body style="background:url(./images/body-bg.png);overflow:hidden;">
+		<div id="bodyKeep"> </div>
+		<div id="loading"> </div>
+		<div id='photos'>
+			<div class='pt'>
+				<img _bigsrc="./images/big1.jpg" src="./images/1.jpg"/>
+			</div>
+			<div class='pt'>
+				
+				<img _bigsrc="./images/big2.jpg" src="./images/2.jpg"/>
+			</div>
+			<div class='pt'>
+				<img _bigsrc="./images/big3.jpg" src="./images/3.jpg"/>
+			</div>
+			<div class='pt'>
+				<img _bigsrc="./images/big4.jpg" src="./images/4.jpg"/>
+			</div>
+			<div class='pt'>
+				<img _bigsrc="./images/big5.jpg" src="./images/5.jpg"/>
+			</div>
+			<div class='pt'>
+				<img _bigsrc="./images/big6.jpg" src="./images/6.jpg"/>
+			</div>
+		</div>
+		<div id="popup">
+			<div class='box'>
+				<a href="javascript:void(0);" class='colse'> </a>
+				<a href="javascript:void(0);" class='btnLeft changeBtn'> </a>
+				<a href="javascript:void(0);" class='btnRight changeBtn'> </a>
+				<img  src="./images/4.jpg"/>
+			</div>
+		</div>
+	</body>
+</html>
+

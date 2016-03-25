@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<style>
+			*{margin:0px;padding:0px;}
+			li{
+				list-style:none;
+			}
+			img{border:0;}
+			#box{
+				width:980px;
+				height:189px;
+				border:1px solid #c9caca;
+				box-shadow:0px 0px 3px #c9caca;
+				margin:30px auto;
+				font-family:Arial;
+				border-radius:3px;
+			}
+			#box .products{
+				width:100%;
+				height:158px;
+				overflow:hidden;
+				position:relative;
+			}
+			#box .products .pd{
+				width:140px;
+				height:148px;
+				overflow:hidden;
+				position:absolute;
+				left:500px;
+				top:-180px;
+				text-align:center;
+				line-height:10px;
+			}
+			#box .products .pd a{
+				font-size:12px;
+				text-decoration:none;
+				color:#333;
+				text-shadow:0 1px rgba(255, 255, 255, 0.9);
+			}
+			#box .products .pd a span{
+				display:block;
+			}
+			
+			#item{
+				width:100%;
+				height:31px;
+				line-height:31px;
+				font-size:12px;
+				background:url(./images/itembg.png) repeat-x 0px 0px;
+				text-align:center;
+			}
+			#item a{
+				margin:0px 5px;
+				text-decoration:none;
+				color:#7f7f7f;
+				display:inline-block;
+				height:31px;
+				width:65px;
+			}
+			#item a:hover{
+				color:#333;
+				text-shadow:0 1px rgba(255, 255, 255, 0.9);
+			}
+			#item a.active{
+				color:#333;
+				text-shadow:0 1px rgba(255, 255, 255, 0.9);
+				background:url(./images/carat_active.png) no-repeat 25px 0px;
+			}
+		</style>
+		<script type="text/javascript" src="move.js"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oPdBox = document.getElementById('pdBox');	//产品父级
+				var aPd = getByClass('pd',oPdBox);	//每个产品
+				var iPd_w = aPd[0].offsetWidth;	//产品的统一宽度
+				var aA = document.getElementById('item').getElementsByTagName('a'); //分类的标签
+				var iThisPage = 0;	//当前页
+				var bHold = true;	//开关
+				//给分类a标签加事件
+				for(var i=0;i<aA.length;i++){
+					aA[i].index = i;
+					aA[i].onclick=function(){
+						//检测开关
+						if(bHold === false){
+							return;
+						}
+						bHold = false;
+						for(var n=0;n<aA.length;n++){
+							aA[n].className = '';
+						}
+						this.className = 'active';
+						//切换页与当前页不相同的时候调用运动过程
+						if(this.index !=iThisPage){
+							hide(this.index);
+						}	
+					}
+				}
+				/**
+				 *  隐藏当前页， 并在隐藏后调用show方法，显示准备切换的产品
+				 */
+				function hide(iPage){
+					var aThisPd = getByClass('page'+iThisPage,oPdBox);	//匹配当前页数据
+					if(iThisPage<iPage){	//检测运动方向
+						var iTarget = -oPdBox.offsetWidth;		//目标点
+						setInitSite(iThisPage,oPdBox.offsetWidth*2);	//设置运动初始点
+							var i=0;
+					}else{
+						var iTarget =oPdBox.offsetWidth*2;
+						setInitSite(iThisPage,-oPdBox.offsetWidth);
+						var i=aThisPd.length-1;
+					}
+					//定义器设置间隔运动
+					var t=setInterval(function(){
+						buffer(aThisPd[i],{		//缓存运动
+							left:iTarget
+						},8);
+						//判断自增与自减的条件
+						if(iThisPage<iPage){
+							i++;
+							if(i==aThisPd.length){
+								stop()
+							}
+						}else{
+							i--;
+							if(i==-1){
+								stop()
+							}
+						}
+					},60)
+					//关闭定时器
+					function stop(){
+						clearInterval(t);
+						setTimeout(function(){
+							show(iPage)
+						},600)
+					}
+				}
+				show(0)
+				/**
+				 * 显示切换页的产品
+				 */
+				function show(iPage){
+					var aThisPd = getByClass('page'+iPage,oPdBox);		//匹配切换页的产品
+					var pos = getPos(aThisPd.length);		//获取位置信息
+					var i=iThisPage<iPage?0:aThisPd.length-1;		//判断运动顺序
+					var count = 0;  //统计运动是否完成
+					//定义器设置运动间隔
+					var t=setInterval(function(){
+						fiexible(aThisPd[i],{		//弹性运动
+							left:pos[i],
+							top:0
+						},'',function(){
+							count++;
+							if(count == aThisPd.length){	//运动完成，开启开关
+								bHold = true;
+							}
+						});
+						if(iThisPage<iPage){
+							i++;
+							if(i == aThisPd.length){
+								stop()
+							}
+						}else{
+							i--;
+							if(i==-1){
+								stop()
+							}
+						}
+					},30)
+					function stop(){
+						iThisPage = iPage;
+						clearInterval(t);
+					}
+				}
+				//初始化，不是当前页的元素的位置
+				/**
+				 * 设置运动元素的初始点
+				 */
+				function setInitSite(iPage,iTarget){
+					var re = new RegExp('\\b'+'page'+iPage+'\\b');
+					for(var i=0;i<aPd.length;i++){
+						if(!re.test(aPd[i].className)){
+							aPd[i].style.left = iTarget + 'px';
+							aPd[i].style.top = 0 + 'px';
+						}
+					}
+				}	
+				/**
+				 * 获取元素的定位数据
+				 */
+				function getPos(len){
+					var pos = [];
+					var iBaseLeft = parseInt((oPdBox.offsetWidth-len*iPd_w)/2);
+					for(var i=0;i<len;i++){
+						pos.push(i*iPd_w+iBaseLeft);
+					}
+					return pos;
+				}
+			}
+			/**
+			 * 通过class选择元素
+			 */
+			function getByClass(sName,oParent){
+				var obj = oParent.getElementsByTagName('*');
+				var re = new RegExp('\\b'+sName+'\\b');
+				var result = [];
+				for(var i=0;i<obj.length;i++){
+					if(re.test(obj[i].className)){
+						result.push(obj[i]);
+					}
+				}
+				return result;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<div class="products" id="pdBox">
+				<!--- 第一页 --->
+				<div class='pd page0'>
+					<a href="javascript:void(0)">
+						<img src="./images/macbookair.jpg"/>
+						Macbook Air
+					</a>
+				</div>
+				<div class='pd page0'>
+					<a href="javascript:void(0)">
+						<img src="./images/macbookpro.jpg"/>
+						Macbook Pro
+					</a>
+				</div>
+				<div class='pd page0'>
+					<a href="javascript:void(0)">
+						<img src="./images/macmini.jpg"/>
+						Mac mini
+					</a>
+				</div>
+				<div class='pd page0'>
+					<a href="javascript:void(0)">
+						<img src="./images/imac.jpg"/>
+						iMac
+					</a>
+				</div>
+				<div class='pd page0'>
+					<a href="javascript:void(0)">
+						<img src="./images/macpro.jpg"/>
+						Mac Pro
+					</a>
+				</div>
+				<div class='pd page0'>
+					<a href="javascript:void(0)">
+						<img src="./images/macosx_mountainlion.jpg"/>
+						OS X Mountain Lion
+					</a>
+				</div>
+				
+				
+				<!--- 第二页 --->
+				<div class='pd page1'>
+					<a href="javascript:void(0)">
+						<img src="./images/ilife.jpg"/>
+						iLife
+					</a>
+				</div>
+				<div class='pd page1'>
+					<a href="javascript:void(0)">
+						<img src="./images/iwork.jpg"/>
+						iWork
+					</a>
+				</div>
+				<div class='pd page1'>
+					<a href="javascript:void(0)">
+						<img src="./images/safari.jpg"/>
+						Safari
+					</a>
+				</div>
+				<div class='pd page1'>
+					<a href="javascript:void(0)">
+						<img src="./images/aperture.jpg"/>
+						Aperture
+					</a>
+				</div>
+				<div class='pd page1'>
+					<a href="javascript:void(0)">
+						<img src="./images/final_cut_pro.jpg"/>
+						Final Cut Pro
+					</a>
+				</div>
+				<div class='pd page1'>
+					<a href="javascript:void(0)">
+						<img src="./images/logic_pro.jpg"/>
+						Logic Pro
+					</a>
+				</div>
+				
+				<!-- 第三页 -->
+				<div class='pd page2'>
+					<a href="javascript:void(0)">
+						<img src="./images/keyboard.jpg"/>
+						Apple Wireless Keyboard
+					</a>
+				</div>
+				<div class='pd page2'>
+					<a href="javascript:void(0)">
+						<img src="./images/magicmouse.jpg"/>
+						Magic Mouse
+					</a>
+				</div>
+				<div class='pd page2'>
+					<a href="javascript:void(0)">
+						<img src="./images/magictrackpad.jpg"/>
+						Magic Trackpad
+					</a>
+				</div>
+				<div class='pd page2'>
+					<a href="javascript:void(0)">
+						<img src="./images/display.jpg"/>
+						LED Cinema Display
+					</a>
+				</div>
+				<div class='pd page2'>
+					<a href="javascript:void(0)">
+						<img src="./images/airportexpress.jpg"/>
+						AirPort Express
+					</a>
+				</div>
+				<div class='pd page2'>
+					<a href="javascript:void(0)">
+						<img src="./images/airportextreme.jpg"/>
+						AirPort Extreme
+					</a>
+				</div>
+				<div class='pd page2'>
+					<a href="javascript:void(0)">
+						<img src="./images/timecapsule.jpg"/>
+						Time Capsule
+					</a>
+				</div>
+				
+				<!-- 第四页  -->
+				<div class='pd page3'>
+					<a href="javascript:void(0)">
+						<img src="./images/macosx_server.jpg"/>
+						OS X Server
+					</a>
+				</div>
+				<div class='pd page3'>
+					<a href="javascript:void(0)">
+						<img src="./images/macpro.jpg"/>
+						Mac Pro with OS X Server
+					</a>
+				</div>
+				<div class='pd page3'>
+					<a href="javascript:void(0)">
+						<img src="./images/apple_remote_desktop.jpg"/>
+						Apple Remote Desktop
+					</a>
+				</div>
+				<div class='pd page3'>
+					<a href="javascript:void(0)">
+						<img src="./images/macmini_server.jpg"/>
+						Mac mini with OS
+					</a>
+				</div>
+			</div>
+			<div id="item">
+				<a class='active'  href="javascript:void(0);">Mac</a>
+				<a href="javascript:void(0);">应用软件</a>
+				<a href="javascript:void(0);">配件</a>
+				<a href="javascript:void(0);">服务器</a>
+			</div>
+		</div>
+	</body>
+</html>
+

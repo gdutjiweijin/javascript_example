@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<meta name="author" content="lenovo" />
+		<!-- Date: 2013-05-31 -->
+		<style>
+			*{margin:0px;padding:0px;}
+			#main{
+				width:100%;
+				height:auto;
+				margin:0 auto;
+				position:relative;
+			}
+			#main .pin{
+				float:left;
+				width:225px;
+				height:auto;
+				padding:15px 0px 0px 15px;
+			}
+			#main .pin .box{
+				width:203px;
+				height:auto;
+				padding:10px;
+				border:1px solid #333;
+				background:#FFF;
+				box-shadow:0px 0px 5px #333;
+				position:relative;
+			}
+			#main .pin .box .loading{
+				width:32px;
+				height:32px;
+				background: url(loading.gif) no-repeat 0px 0px;
+				position:absolute;
+				left:85px;
+				top:45%;
+				z-index:1;
+			}
+			#main .pin .box img{
+				width:100%;
+				z-index:2;
+				position:relative;
+			}
+			#loading{
+				width:100%;
+				height:32px;
+				text-align:center;
+			}
+		</style>
+		<script src="jquery.js"></script>
+		<script type="text/javascript" src="waterfall.js"> </script>
+		<script>
+		/**
+		 * 图像加载失败处理
+		 */
+		function imgError(){
+			$(this).attr('alt',' :( 图像加载失败!');
+			$(this).parent().find('.loading').remove();
+		}
+		function imgLoad(){
+		//	$(this)
+		}
+		$(function(){
+			/*
+			 * 	<div class='pin'>
+					<div class='box'>
+						<img src="./images/1.jpg">
+					</div>
+				</div>
+			 * 
+			 * {
+			 * 	"width":800,
+			 * 	"height":1637,
+			 *  "source":"http:\/\/www.uisheji.com\/wp-content\/uploads\/2013\/03\/25\/1-13020G31412.jpg"
+			 * }
+			 */
+			
+			
+			
+			
+			//滚动条位置大于最低的一列发送请求
+			var bSite = true;
+			var bHold = true;
+			var iPage = 0;
+			$(window).scroll(function(){
+				var minH = Math.min.apply({},pos);
+				bSite = $(window).scrollTop()+$(window).height()>minH;
+				if(bSite && bHold){
+					iPage++;
+					bHold=false;
+					ajaxRequest();
+				}
+			})
+			//需要图像的宽度是
+			ajaxRequest();
+			function ajaxRequest(){
+				$.ajax({
+					type:'GET',
+					url:'request.php?page='+iPage,
+					dataType:'json',
+					beforeSend:function(){
+						$('#loading').show();
+					},
+					success:function(data){
+						if(data.status === true){
+						//	alert(data.result[0].source)
+							var result = data.result;
+							createPin(result)
+						}else{
+							alert('没有数据了')
+						}
+					},
+					error:function(){
+						//?
+					},
+					complete:function(){
+						$('#loading').hide();
+					}
+				})
+			}
+			//onload
+			/**
+			 * 创建瀑布流块
+			 */
+			function createPin(data){
+				for(var i in data){
+					var iH = getHeight(data[i].width,data[i].height);
+				//	var iTop = parseInt((iH-32)/2);
+					$('#main').append('<div class="pin">\
+						<div class="box" style="height:'+iH+'px;">\
+							<div class="loading"></div>\
+							<img alt="图像正在加载中..." onerror="imgError.call(this);" onload="imgLoad.call(this);" height="'+iH+'" src="'+data[i].source+'">\
+						</div>\
+					</div>');
+				}
+				waterfall();
+			/*
+				$('#main .pin').waterfall(2,function(){
+					bHold=true;
+				});
+			*/
+			}
+			/**
+			 * 获取图像的高度
+			 */
+			function getHeight(w,h){
+				return parseInt(203/w*h);
+			}
+			
+			var pos = [];
+			var count = 0;
+			function waterfall(){	
+				var aPin =  $('#main .pin');
+				var oParent=  $('#main');
+				var iBaseW = aPin[0].offsetWidth;
+				var num = parseInt(oParent.innerWidth()/iBaseW);
+				oParent.css({
+					width:iBaseW*num
+				})
+				aPin.each(function(i){
+					if(i<count){
+						return;
+					}
+					if(i<num){
+						pos[i] = aPin.eq(i).innerHeight();
+					}else{
+						var minH = Math.min.apply({},pos);
+						var minK = getMinKey(pos,minH);
+						var minL = aPin.eq(minK)[0].offsetLeft;
+						aPin.eq(i).css({
+							position:'absolute',
+							top:minH,
+							left:minL
+						})
+						pos[minK] +=  aPin.eq(i).innerHeight();
+					}
+					count = i+1;
+				})
+				var maxH = Math.max.apply({},pos);
+				oParent.css({
+					height:maxH,
+					overflow:'hidden'
+				})
+				bHold = true;
+				function getMinKey(arr,min){
+					for(var key in arr){
+						if(arr[key] == min){
+							return key;
+						}
+					}
+				}
+			}
+			
+		})
+				
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			
+		</div>
+		<div id="loading">
+			<img src="loading.gif"/>
+		</div>
+	</body>
+</html>
+

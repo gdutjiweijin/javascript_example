@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<style>
+			*{margin:0px;padding:0px;}
+			#box{
+				width:200px;
+				height:320px;
+				overflow:hidden;
+				margin:10px auto;
+				box-shadow:0px 0px 5px #ddd;
+				position:relative;
+			}
+			#box div{
+				width:600px;
+				height:320px;
+				position:absolute;
+				left:0px;
+				top:0px;
+				z-index:1;
+			}
+			#box div img{
+				width:200px;
+				float:left;
+			}
+			
+			#box ul{
+				width:100%;
+				height:90px;
+				overflow:hidden;
+				position:absolute;
+				left:0px;
+				bottom:30px;
+				z-index:2;
+			}
+			#box ul li{
+				width:180px;
+				height:30px;
+				line-height:30px;
+				font-size:12px;
+				color:#FFF;
+				position:relative;
+				cursor:pointer;
+			}
+			#box ul li span{
+				padding-left:10px;
+			}
+			#box ul li i{
+				display:block;
+				width:5px;
+				height:9px;
+				background:url(images/ico.png) no-repeat -107px -20px;
+				position:absolute;
+				top:10px;
+				right:20px;
+				display:none;
+			}
+		</style>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var aLi = $('#box ul li');
+				var oDiv = $('#box div');
+				aLi.mouseover(function(){
+					aLi.stop();
+					aLi.find('i').hide();
+					$(this).find('i').show();
+					oDiv.stop().animate({
+						left:-$(this).index()*200
+					},500)
+					aLi.stop();
+					$(this).siblings().animate({
+						width:180
+					},600);
+					$(this).animate({
+						width:200
+					},600)
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<div>
+				<img src="images/1.jpg">
+				<img src="images/2.jpg">
+				<img src="images/3.jpg">
+			</div>
+			<ul>
+				<li style="background:#985479;"><span>三星S4天猫抢先首发</span><i> </i></li>
+				<li style="background:#fc6a6d;"><span>大家电周末疯狂抢购</span><i> </i></li>
+				<li style="background:#2f8b98;"><span>平板春游记 分享有礼</span><i> </i></li>
+			</ul>
+		</div>
+		
+
+	</body>
+</html>
+

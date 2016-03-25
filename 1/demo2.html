@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>demo2</title>
+		<meta name="author" content="郑印" />
+		<style type="text/css">
+			*{margin:0px;padding:0px;}
+			img{
+				border:none;
+			}
+			.goods{
+				width:310px;
+				height:230px;
+				border:1px solid #e7e7ea;
+				box-shadow:0px 0px 3px #e7e7ea;
+				margin:30px auto;
+				overflow:hidden;
+			}
+			.goods .box{
+				width:310px;
+				height:180px;
+				position:relative;
+				overflow:hidden;
+			}
+			.goods .box .countDown{
+				width:100%;
+				height:20px;
+				background:rgba(244, 241, 244,0.7);
+				position:absolute;
+				bottom:0px;
+				left:0px;
+				font-size:12px;
+				line-height:20px;
+				overflow:hidden;
+			}
+			.goods .box .countDown span{
+				float:left;
+				margin-left:10px;
+				color:#333333;
+			}
+			.goods .box .countDown a{
+				float:right;
+				color:#333333;
+				text-decoration:none;
+				padding-right:18px;
+				background:url(./images/ico_1.png) no-repeat right 3px;
+				margin-right:10px;
+			}
+			.goods .info{
+				width:100%;
+				height:50px;
+				line-height:50px;
+				font-size:12px;
+				color:#333;
+			}
+			.goods .info span{
+				margin:0px 5px;
+			}
+			.goods .info .title{
+				float:left;
+			}
+			.goods .info .discount{
+				float:right;
+			}
+			.active{
+				border:1px solid #e25f9b;
+			}
+			.active .box .countDown span{
+				color:#e25f9b;
+			}
+			.active .box .countDown a{
+				color:#e25f9b;
+				background:url(./images/ico_2.png) no-repeat right 3px;
+			}
+			.active .info{         
+				background:#e25f9b;
+				color:#FFF;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oGoods = document.getElementById('goods');  //获取大的div
+				var oldClass = oGoods.className;			//保存旧的类名
+				oGoods.onmouseover=function(){		//给大的div加入鼠标移入事件
+					oGoods.className = oldClass+' active';		//鼠标移入的时候，给它添加一个类名		
+				}
+				oGoods.onmouseout=function(){	//给大的div加一个鼠标移出事件
+					oGoods.className = oldClass;	//鼠标移出的时候，把div的类名替换为原来的类名
+				}			
+			}
+		</script>
+	</head>
+	<body>
+		<div class="goods " id="goods" >
+			<div class='box'>
+				<!-- .active .box .countDown span-->
+				<a href="javascript:void(0);"><img src="./images/goods.jpg"/></a>	
+				<div class='countDown'>
+					<p>
+						<span>剩余  3天01时50分07秒</span>
+						<a id="a1" href="javascript:void(0);">品牌介绍</a>
+					</p>
+				</div>
+			</div>
+			<div class='info'>
+				<span class='title'>D2C女装专场</span>
+				<span class='discount'>1.5折起</span>
+			</div>
+		</div>
+	</body>
+</html>
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin:0px;
+			padding: 0px;
+		}
+		.box{
+			width: 500px;
+			height: 400px;
+			box-shadow: 4px 4px 4px #999;
+			margin: 50px auto;
+			position: relative;
+			overflow: hidden;
+		}
+		.box img{
+			position: absolute;
+			left: 0px;
+			top: 0px;
+		}
+		.z1{
+			z-index: 1;
+		}
+		.z2{
+			z-index: 2;
+		}
+		.z3{
+			z-index: 3;
+		}
+		.font{
+			font-size: 16px;
+			color: green;
+			margin-left: 20px;
+			margin-top: 20px;
+			font-weight: 700;
+			font-family: '微软雅黑';
+		}
+	</style>
+	<script type="text/javascript" src="./jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var img = $('.box img');
+			var flag = true;
+			var f = true;
+			var box = $('.box');
+			var px = [500,-500];
+			var op = 0.2;
+
+			box.mouseleave(function() {
+				flag = true;
+			});
+
+			img.mouseover(function() {
+
+				if(flag && f){
+					flag = false;
+					f = false;
+					var n = parseInt(Math.random() * 2);
+					var num = parseInt(Math.random() * 2);
+
+					if(num){
+						$(this).animate({left : px[n],opacity : op},400,function(){
+							comeback($(this));
+						});
+					} else {
+						$(this).animate({top : px[n], opacity : op},400,function(){
+							comeback($(this));
+						});
+					}
+					
+				}
+				
+			});
+
+			function comeback(obj){
+				f = true;
+				obj.css({
+					'left' : 0,
+					'top'  : 0,
+					'z-index' : 1,
+					'opacity' : 1
+				});
+				img.not(obj).each(function(){
+					$(this).css({
+						'z-index' : parseInt($(this).css('z-index')) + 1
+					});
+				})
+			}
+		})
+	</script>
+</head>
+<body>
+	<div class="font">鼠标在图片移入移出多来几次试试</div>
+	<div class="box">
+		<img src="./img/1.jpg" class="z1" />
+		<img src="./img/2.jpg" class="z2" />
+		<img src="./img/3.jpg" class="z3" />
+	</div>
+</body>
+</html>

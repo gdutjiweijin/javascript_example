@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<style>
+			*{margin:0px;padding:0px;}
+			li{
+				list-style:none;
+			}
+			#main{
+				background:#4e4e4e;
+				width:700px;
+				height:auto;
+				padding:10px;
+				margin:30px auto;
+				border:1px solid #ddd;
+				box-shadow:0px 0px 3px #DDD;
+				overflow:hidden;
+			}
+			#main .big{
+				width:680px;
+				height:auto;
+				margin:0px auto;
+				overflow:hidden;
+			}
+			#main .big img{
+				width:100%;
+				display:none;
+			}
+			#main .small{
+				width:605px;
+				height:100px;
+				overflow:hidden;
+				margin:0px auto;
+				position:relative;
+				padding:20px 0px;
+			}
+			#main .small .btnLeft{
+				width:20px;
+				height:65px;
+				overflow:hidden;
+				display:block;
+				position:absolute;
+				left:0px;
+				top:25px;
+				background:url(./images/btn.jpg) no-repeat 0px 0px;
+			}
+			#main .small .btnRight{
+				width:20px;
+				height:65px;
+				overflow:hidden;
+				display:block;
+				position:absolute;
+				right:0px;
+				top:25px;
+				background:url(./images/btn.jpg) no-repeat -21px 0px;
+			}
+			#main .small .hide{
+				width:546px;
+				height:77px;
+				overflow:hidden;
+				margin:0px auto;
+				position:relative;
+				height:77px;
+			}
+			#main .small ul{
+				position:absolute;
+				width:100000px;
+				height:77px;
+				left:0px;
+				top:0px;
+			}
+			#main .small ul li{
+				width:100px;
+				height:75px;
+				float:left;
+				border:1px solid #6e6e6e;
+				margin-right:6px;
+				cursor:pointer;
+				overflow:hidden;
+				
+			}
+			#main .small ul li.active{
+				border:1px solid #F00;
+			}
+			#main .small ul li img{
+				width:100%;
+				height:100%;
+			}
+			#main  .scrollBar{
+				width:530px;
+				height:21px;
+				margin:3px auto 0px auto;
+				position:relative;
+				border-radius:5px;
+				background:url(./images/bar.jpg) repeat-x 0px 0px;
+			}
+			#main  .scrollBar .scroll{
+				width:72px;
+				height:15px;
+				background:url(./images/scroll.jpg) repeat-x 0px -16px;
+				position:absolute;
+				left:0px;
+				top:3px;
+				cursor:pointer;
+				overflow:hidden;
+			}
+			#main  .scrollBar .scroll .arrows_l{
+				width:11px;
+				height:15px;
+				background:url(./images/scroll.jpg) no-repeat left 0px;
+				float:left;
+			}
+			#main  .scrollBar .scroll .arrows_r{
+				width:11px;
+				height:15px;
+				background:url(./images/scroll.jpg) no-repeat right 0px;
+				float:right;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oSmallBox = document.getElementById('smallBox'); //小图盒子
+				var aSmallImg = oSmallBox.getElementsByTagName('li'); //小图
+				var oBig = document.getElementById('big'); //大图盒子
+				var aBigImg = oBig.getElementsByTagName('img'); //大图
+				var oBtnLeft = document.getElementById('btnLeft');  //左边的按钮
+				var oBtnRight = document.getElementById('btnRight'); //右边的按钮
+				var oScrollBar = document.getElementById('scrollBar'); //滚动条父级
+				var oScroll = document.getElementById('scroll'); //滚动条
+				var iBaseW = aSmallImg[0].offsetWidth+6;	//每个小图所占页面的位置
+				var iSmallBoxW = iBaseW*aSmallImg.length;   //小图父级的宽度
+				oSmallBox.style.width = iSmallBoxW +'px';   //设置父级的宽度
+				
+			
+				
+				
+				var iNow = 0;
+				// 1.点击小图切换类名  2.点击小图，让对应的大图显示  
+				for(var i=0;i<aSmallImg.length;i++){
+					aSmallImg[i].index = i;
+					aSmallImg[i].onclick=function(){
+						iNow = this.index;
+						tab(iNow)
+					}
+				}
+				//点击左边按钮,向左切换一张 4=>3=>2 --
+				oBtnLeft.onclick=function(){
+					iNow--;
+					tab(iNow);
+				}
+				
+				
+				//点击右边按钮,向右切换一张   0=>1=>2=>3=>4  ++
+				
+				oBtnRight.onclick=function(){
+					iNow++;
+					tab(iNow);
+				}
+				function tab(index){
+					
+					//超出做大的长度，拉会到第一张
+					if(index > aSmallImg.length-1){
+						index = 0;
+						iNow = index;
+					}
+					//小于0，拉回最后一张
+					if(index<0){
+						index = aSmallImg.length-1;
+						iNow = index;
+					}
+					//隐藏所以的大图,情况小图类名
+					for(var n=0;n<aSmallImg.length;n++){
+						aSmallImg[n].className = '';
+						aBigImg[n].style.display = 'none';
+					}
+					//显示当前大图，添加当前小图类名
+					aBigImg[index].style.display = 'block';
+					aSmallImg[index].className = 'active';
+					//切换时设置移动的left值
+					var iLeft = index*iBaseW;
+					if(iLeft>=iBoxLimit){
+						iLeft=iBoxLimit;
+					}
+					//更具比例，设置move函数的参数
+					move(iLeft/iScale);
+				}
+				
+				//计算滚动条的宽度
+				var iScrollW = parseInt((oScrollBar.offsetWidth/iSmallBoxW)*oScrollBar.offsetWidth);
+				if(iScrollW>=oScrollBar.offsetWidth){
+					iScrollW = oScrollBar.offsetWidth;
+				}else if(iScrollW<=30){
+					iScrollW=30;
+				}
+				
+				//设置
+				oScroll.style.width = iScrollW +'px';
+				//滚动条最大移动范围
+				var iScrollLimit = oScrollBar.offsetWidth-oScroll.offsetWidth;
+				var iBoxLimit = (aSmallImg.length-5)*iBaseW;
+				var iScale = iBoxLimit/iScrollLimit;
+
+				//给滚动条加上拖拽
+				oScroll.onmousedown=function(ev){
+					var oEvent = ev || event;
+					var siteX =  oEvent.clientX - oScroll.offsetLeft;
+					document.onmousemove=function(ev){
+						var oEvent = ev || event;
+						var iLeft = oEvent.clientX - siteX;
+						//限制范围
+						if(iLeft<=0){
+							iLeft = 0;
+						}else if(iLeft>=iScrollLimit){
+							iLeft=iScrollLimit;
+						}
+						move(iLeft)
+					}
+					document.onmouseup=function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
+				}
+				
+				function move(l){
+					oScroll.style.left = l +'px';
+					oSmallBox.style.left = -l*iScale +'px';
+				}
+				
+				
+				//smallBox  的宽度 =iSmallBoxW
+				//scrollBar 的宽度=oScrollBar.offsetWidth
+				//0.5 * 300  150
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			<div class="big" id="big">
+				<img src="./images/bbs.png" style="display:block;"/>
+				<img src="./images/study.png"/>
+				<img src="./images/yy.png"/>
+				<img src="./images/job.png"/>
+				<img src="./images/hdphp.png"/>
+				<img src="./images/class1.jpg"/>
+				<img src="./images/class2.jpg"/>
+			</div>
+			<div class="small" id="small">
+				<a href="javascript:void(0);" id="btnLeft" class='btnLeft'> </a>
+				<a href="javascript:void(0);" id="btnRight" class='btnRight'> </a>
+				<div class='hide'>
+					<ul id="smallBox">
+						<li class='active'><img src="./images/bbs.png"/></li>
+						<li><img src="./images/study.png"/></li>
+						<li><img src="./images/yy.png"/></li>
+						<li><img src="./images/job.png"/></li>
+						<li><img src="./images/hdphp.png"/></li>
+						<li><img src="./images/class1.jpg"/></li>
+						<li><img src="./images/class2.jpg"/></li>
+					</ul>
+				</div>
+				<div class='scrollBar' id="scrollBar">
+					<div id="scroll" class='scroll'>
+						 <span class='arrows_l'> </span>
+						 <span class='arrows_r'> </span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

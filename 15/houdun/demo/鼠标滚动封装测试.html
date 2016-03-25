@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>鼠标滚动封装测试</title>
+		<style>
+			#div1{
+				width:300px;
+				height:300px;
+				background:#F00;
+				margin:10px auto;
+			}
+			
+		</style>
+		<script type="text/javascript" src="onWheel.js"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oDiv = document.getElementById('div1');
+				onWheel(oDiv,function(bCur){
+					
+					if(bCur){
+						oDiv.style.height = oDiv.offsetHeight + 20 +'px'
+					}else{
+						oDiv.style.height = oDiv.offsetHeight - 20 +'px'
+					}
+				
+				})
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			asdasdasd
+			
+		</div>
+	</body>
+</html>
+

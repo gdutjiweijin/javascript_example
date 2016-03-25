@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.d{
+			position: absolute;
+			top: 200px;
+			background: url(./img/duilian.jpg) no-repeat;
+			width: 120px;
+			height: 270px;
+			display: none;
+		}
+		.l{left: 6px;}
+		.r{right: 6px;}
+		.close{
+			position: absolute;
+			top:1px;
+			right: 1px;
+			font-size: 12px;
+			color: #fff;
+		}
+	</style>
+	<script type="text/javascript" src="./jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var d = $('.d');
+			var close = $('.close');
+			var SW = screen.width;
+			if(SW > 1024){
+				d.show();
+			}
+			$(window).scroll(function() {
+				var ST = $(window).scrollTop();
+				d.stop().animate({top : 200 + ST});
+			});
+
+			close.click(function(){
+				$(this).parent().hide();
+				return false;
+			})
+		})
+	</script>
+</head>
+<body style="height:5000px;">
+	<div class="d l"><a href="" class="close">X关闭</a></div>
+	<div class="d r"><a href="" class="close">X关闭</a></div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<style>
+			body{
+				background:#57beb9;
+			}
+			#main{
+				width:920px;
+				height:430px;
+				overflow:hidden;
+				position:relative;
+				margin:30px auto;
+			}
+			#main .box{
+				width:820px;
+				height:430px;
+				box-shadow:0px 0px 5px #ddd;
+				margin:0px auto;
+				overflow:hidden;
+				position:relative;
+			}
+			#main .box img{
+				width:820px;
+				height:430px;
+				position:absolute;
+				left:0px;
+				top:0px;
+				opacity:0;
+				filter:alpha(opacity=0);
+			}
+			#main .btnLeft{
+				width:35px;
+				height:57px;
+				position:absolute;
+				left:0px;
+				top:185px;
+				background:url(./images/left_ar.png) no-repeat 0px 0px;
+			}
+			#main .btnRight{
+				width:35px;
+				height:57px;
+				position:absolute;
+				right:0px;
+				top:185px;
+				background:url(./images/right_ar.png) no-repeat 0px 0px;
+			}
+			#main  .page{
+				width:132px;
+				height:22px;
+				position:absolute;
+				bottom:15px;
+				right:50px;
+			}
+			#main  .page a{
+				display:inline-block;
+				width:22px;
+				height:22px;
+				background:url(./images/num_grey.png) no-repeat 0px 0px;
+				margin:0px 11px;
+				float:left;
+				color:#FFF;
+				text-decoration:none;
+				text-align:center;
+			}
+			#main  .page a.active{
+				background:url(./images/num_red.png) no-repeat 0px 0px;
+			}
+		</style>
+		<script src="jquery.js"> </script>
+		<script>
+			$(function(){
+				var aPage = $('#main .page a');		//分页按钮
+				var aImg = $('#main .box img');		//图像集合
+				var iSize = aImg.size();		//图像个数
+				var index = 0;		//切换索引
+				$('#btnLeft').click(function(){		//左边按钮点击
+					index--;
+					if(index<0){
+						index=iSize-1
+					}
+					change()
+				})
+				$('#btnRight').click(function(){    //右边按钮点击
+					index++;
+					if(index>iSize-1){
+						index=0
+					}
+					change()
+				})
+				//分页按钮点击
+				aPage.click(function(){
+					index = $(this).index();
+					change()
+				});
+				//切换过程
+				function change(){
+					aPage.removeClass('active');
+					aPage.eq(index).addClass('active');
+					aImg.stop();
+					//隐藏除了当前元素，所以图像
+					aImg.eq(index).siblings().animate({
+						opacity:0
+					},1000)
+					//显示当前图像
+					aImg.eq(index).animate({
+						opacity:1
+					},1000)
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			<a class='btnLeft' id="btnLeft" href="javascript:void(0);"> </a>
+			<a class='btnRight' id="btnRight" href="javascript:void(0);"> </a> 
+			<div class="box">
+				<img style="opacity:1;filter:alpha(opacity=100);" src="./images/intro1.jpg"/>				
+				<img  src="./images/intro2.jpg"/>
+				<img src="./images/intro3.jpg"/>
+			</div>
+			<div class='page'>
+				<a  class='active'  href="javascript:void(0);">1</a>
+				<a  href="javascript:void(0);">2</a>
+				<a href="javascript:void(0);">3</a>
+			</div>
+		</div>
+	</body>
+</html>
+

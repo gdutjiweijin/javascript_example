@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		.box{
+			width: 900px;
+			height: 500px;
+			border: 1px solid #f00;
+			margin: 50px auto;
+		}
+		.small{
+			width: 400px;
+			height: 400px;
+			border: 1px solid #000;
+			float: left;
+			position: relative;
+		}
+		.small b{
+			width: 100px;
+			height: 100px;
+			background: pink;
+			opacity: 0.4;
+			filter:alpha(opacity=40);
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			display: none;
+		}
+		.big{
+			width: 400px;
+			height: 400px;
+			border: 1px solid blue;
+			overflow: hidden;
+			float: left;
+			margin-left: 20px;
+			margin-top: 30px;
+			position: relative;
+			display: none;
+		}
+		.big img{
+			position: absolute;
+			left: 0px;
+			top: 0px;
+		}
+	</style>
+	<script type="text/javascript" src="./jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$(".small").mouseover(function(e){
+				$(".big").show();
+				$(".small b").show();
+				var L=e.pageX;
+				var T=e.pageY;
+				var small=$(".small");
+				var small_L=small.offset().left;
+				var small_T=small.offset().top;
+                
+				var b_L=L-small_L-50;
+				var b_T=T-small_T-50;
+				b_L=b_L<0?0:b_L;
+				b_T=b_T<0?0:b_T;
+				b_L=b_L>300?300:b_L;
+				b_T=b_T>300?300:b_T;
+					    
+				small.find("b").css({
+                    top:b_T,
+					left:b_L
+				});
+				
+				var imgLeft = -b_L * 2;
+				var imgTop = -b_T * 2;
+				imgLeft = imgLeft < -400 ? -400 : imgLeft;
+				imgTop = imgTop < -400 ? -400 : imgTop;
+
+				$('.big img').css({left : imgLeft, top : imgTop});
+			
+                
+			});
+			$('.small').mouseout(function() {
+				$('.small b').hide();
+				$('.big').hide();
+			});
+			
+		});
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="small"><img src="./400.jpg" alt="" /><b></b></div>
+		<div class="big"><img src="./800.jpg" alt="" /></div>
+	</div>
+</body>
+</html>

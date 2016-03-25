@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<style>
+		*{margin:0px;padding:0px;}
+			#div1{
+				width:100px;
+				height:100px;
+				background:red;
+				position:absolute;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oDiv = document.getElementById('div1');
+				//1  当鼠标按下的时候，取得鼠标距离物体边线的位置
+				//2 当鼠标移动时候，更具鼠标的位置与 鼠标按下时的距离物体边线的间隔，计算出物体的left值
+				
+				
+				document.onmousedown=function(ev){
+					var oEvent = ev || event;
+					var siteX = oEvent.clientX-oDiv.offsetLeft;
+					var siteY = oEvent.clientY-oDiv.offsetTop;
+					document.onmousemove=function(ev){
+						var oEvent = ev || event;
+						var iLeft = oEvent.clientX - siteX;
+						var iTop = oEvent.clientY - siteY;
+						oDiv.style.left = iLeft + 'px';
+						oDiv.style.top = iTop + 'px';
+					}
+					document.onmouseup=function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		
+		
+			<div id="div1" style="left:100px;top:100px;">
+				
+			</div>
+	</body>
+</html>
+

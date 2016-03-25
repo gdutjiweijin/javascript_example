@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>鼠标滚轮</title>
+		<style>
+			#div1{
+				width:300px;
+				height:300px;
+				background:#F00;
+				margin:10px auto;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				var oDiv = document.getElementById('div1');
+				// 鼠标滚轮事件     onmousewheel   IE ,谷歌 下
+				/*
+				oDiv.onmousewheel=function(){
+					
+				}
+				*/
+				//火狐下
+				/*
+				oDiv.DOMMouseScroll=function(){
+					alert('a')
+				}
+				*/
+				function onWheel(ev){
+					//alert('a');
+					var oEvent = ev || event;
+					
+					//火狐
+					
+					// 往上滚动   负数 -3
+					// 往下滚动   正数 3
+					//alert(oEvent.detail);
+					
+					//IE
+					
+					//往上滚动  正数 120
+					//往下滚动  负数 -120
+					//alert(oEvent.wheelDelta)
+					var bCur = oEvent.detail?oEvent.detail>0:oEvent.wheelDelta <0;
+					
+					/*
+					var bCur = true;
+					if(oEvent.detail){
+						if(oEvent.detail>0){
+							bCur = true;
+						}else{
+							bCur = false;
+						}
+					}else{
+						if(oEvent.wheelDelta <0){
+							bCur = true;
+						}else{
+							bCur = false;
+						}
+					}
+					*/
+					
+					if(bCur){
+						oDiv.style.height = oDiv.offsetHeight +20 +'px';
+					}else{
+						oDiv.style.height = oDiv.offsetHeight -20 +'px';
+					}
+					if(oEvent.preventDefault){
+						oEvent.preventDefault();
+					}
+					return false;
+				}
+				addEvent(oDiv,'DOMMouseScroll',onWheel)
+				addEvent(oDiv,'mousewheel',onWheel)
+				//事件绑定
+			}
+			
+			function addEvent(obj,sEv,fn){
+				if(obj.attachEvent){
+					obj.attachEvent('on'+sEv,fn);
+				}else{
+					obj.addEventListener(sEv,fn,false)
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			
+			
+			
+		</div>
+	</body>
+</html>
+
